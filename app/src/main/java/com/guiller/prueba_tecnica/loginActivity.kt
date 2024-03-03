@@ -5,13 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
@@ -55,7 +51,7 @@ class loginActivity : AppCompatActivity() {
         }
         btnIngres.setOnClickListener {
             if(validCamp()){
-
+                Toast.makeText(this, "ta viens", Toast.LENGTH_SHORT).show()
             }else
             {
                 Toast.makeText(this, "Rellenar todos los campos", Toast.LENGTH_SHORT).show()
@@ -89,16 +85,15 @@ class loginActivity : AppCompatActivity() {
         val pass = txtPass.text.toString()
 
 
-        if(us.length < 1 && pass.length < 1 )
-        {
-            return caseCamp(3)
-        }else if(us.length < 1 ){
-            return caseCamp(1)
+        return if(us.isEmpty() && pass.isEmpty() ) {
+            caseCamp(3)
+        }else if(us.isEmpty() ){
+            caseCamp(1)
 
-        }else if(pass.length < 1){
-            return caseCamp(2)
+        }else if(pass.isEmpty()){
+            caseCamp(2)
         }else{
-            return true
+            true
         }
 
     }

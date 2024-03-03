@@ -70,7 +70,7 @@
                 android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/txtUser"
+                android:id="@+id/txtUser2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_txt"
@@ -98,7 +98,7 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtPass"
+                    android:id="@+id/txtPass2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border_txt"
