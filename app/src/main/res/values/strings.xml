@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Prueba_Tecnica</string>
+    <string name="us_name">Usuario</string>
+    <string name="us_name_name">Nombre Usuario</string>
+    <string name="pass_name">Contraseña</string>
+    <string name="pass_verifi_name">Confirmar contraseña</string>
+    <string name="ingre">Ingresar</string>
+    <string name="no_account">No tienes cuenta</string>
+    <string name="regis">Registrate</string>
+    <string name="ver">Ver</string>
+    <string name="ingre_data">Ingresar datos</string>
+    <string name="examp_hint">Juan Manolo</string>
+    <string name="examp_hint_2">juan123</string>
+    <string name="registro">Registrar</string>
+    <string name="cancel">Cancelar</string>
+
 </resources>
