@@ -45,7 +45,22 @@ class loginActivity : AppCompatActivity() {
 
     }
     private fun listenerComponet(){
+        btnReg.setOnClickListener {
+            if(checkNetwork(this)){
+                val intent = Intent(this,registrActivity::class.java)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "No se pudo conectar, verifique la conexion a internet", Toast.LENGTH_SHORT).show()
+            }
+        }
+        btnIngres.setOnClickListener {
+            if(validCamp()){
 
+            }else
+            {
+                Toast.makeText(this, "Rellenar todos los campos", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
     private fun focusChanged() {
         txtUser.setOnFocusChangeListener { V, hasFocus ->
@@ -64,29 +79,49 @@ class loginActivity : AppCompatActivity() {
                 txtPass.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt))
             }
         }
-        btnReg.setOnClickListener {
-            if(checkNetwork(this)){
-                val intent = Intent(this,registrActivity::class.java)
-                startActivity(intent)
-            }else{
-                Toast.makeText(this, "No se pudo conectar, verifique la conexion a internet", Toast.LENGTH_SHORT).show()
-            }
-        }
-        btnIngres.setOnClickListener {
-            if(validCamp()){
 
-            }else
-            {
-                Toast.makeText(this, "Rellenar todos los campos", Toast.LENGTH_SHORT).show()
-            }
-        }
 
 
     }
-    private fun validCamp(): Boolean{
+    private fun validCamp(): Boolean {
 
-        val us = txtUser.get
+        val us =txtUser.text.toString()
+        val pass = txtPass.text.toString()
 
+
+        if(us.length < 1 && pass.length < 1 )
+        {
+            return caseCamp(3)
+        }else if(us.length < 1 ){
+            return caseCamp(1)
+
+        }else if(pass.length < 1){
+            return caseCamp(2)
+        }else{
+            return true
+        }
+
+    }
+    private fun caseCamp(case: Int): Boolean{
+        return when(case){
+            0 ->{
+                true
+            }
+
+            1 ->{ txtUser.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt_error))
+                false
+            }
+
+            2 -> {txtPass.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt_error))
+                false
+            }
+            3 -> {txtPass.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt_error))
+                txtUser.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt_error))
+                false
+            }
+
+            else -> false
+        }
     }
 
     fun checkNetwork(context: Context): Boolean {

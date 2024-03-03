@@ -64,7 +64,6 @@
                 android:textColorHint="@color/black"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/black"
-
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -73,7 +72,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/border_txt"
                     android:textColor="@color/black"
-                    android:textSize="10sp"
+                    android:textSize="20sp"
+                    android:inputType="textPassword"
 
 
                     tools:ignore="SmallSp" />
