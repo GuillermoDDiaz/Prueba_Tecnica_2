@@ -10,8 +10,15 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
-
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+val Context.dataStore by preferencesDataStore(name = "Users")
 class registrActivity : AppCompatActivity() {
+
 
 
     private lateinit var btnCancel: AppCompatButton
@@ -76,7 +83,8 @@ class registrActivity : AppCompatActivity() {
         btnRegist.setOnClickListener {
             if(checkCamp()){
                 if(checkNetwork(this)){
-                    Toast.makeText(this, "ta vien", Toast.LENGTH_SHORT).show()
+                   lifecycleScope.launch (Dispatchers.IO){
+                    saveDatas()}
                 }else
                 {
                     Toast.makeText(this, "No conexion a internet, intente nuevamente", Toast.LENGTH_SHORT).show()
@@ -181,6 +189,15 @@ class registrActivity : AppCompatActivity() {
         }
         return ret
 
+    }
+    private suspend fun saveDatas(){
+        dataStore.edit {preferences ->
+            preferences[stringPreferencesKey("name")] = txtUserName.text.toString()
+            preferences[stringPreferencesKey("username")] = txtUser2.text.toString()
+            preferences[stringPreferencesKey("password")] = txtPass2.text.toString()
+
+
+        }
     }
     fun checkNetwork(context: Context): Boolean {
         val connectivityManager =

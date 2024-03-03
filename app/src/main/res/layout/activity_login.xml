@@ -112,6 +112,13 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/hola"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_account"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"

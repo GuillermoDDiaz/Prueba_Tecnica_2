@@ -8,10 +8,20 @@ import android.net.NetworkCapabilities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
+import androidx.datastore.dataStore
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.lifecycle.lifecycleScope
+import com.guiller.prueba_tecnica.classes.getUser
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class loginActivity : AppCompatActivity() {
 
@@ -21,6 +31,7 @@ class loginActivity : AppCompatActivity() {
     private lateinit var txtPass: AppCompatEditText
     private lateinit var btnReg: AppCompatButton
     private lateinit var btnIngres: AppCompatButton
+    private lateinit var hola: TextView
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +48,7 @@ class loginActivity : AppCompatActivity() {
         txtPass = findViewById(R.id.txtPass)
         btnReg = findViewById(R.id.btnReg)
         btnIngres = findViewById(R.id.btnIngres)
-
+        hola = findViewById(R.id.hola)
 
     }
     private fun listenerComponet(){
@@ -51,7 +62,7 @@ class loginActivity : AppCompatActivity() {
         }
         btnIngres.setOnClickListener {
             if(validCamp()){
-                Toast.makeText(this, "ta viens", Toast.LENGTH_SHORT).show()
+                Login()
             }else
             {
                 Toast.makeText(this, "Rellenar todos los campos", Toast.LENGTH_SHORT).show()
@@ -116,6 +127,20 @@ class loginActivity : AppCompatActivity() {
             }
 
             else -> false
+        }
+    }
+    private fun getusers() = dataStore.data.map {preferences ->
+       getUser(name = preferences[stringPreferencesKey("name")].orEmpty(),
+           username = preferences[stringPreferencesKey("username")].orEmpty(),
+           password = preferences[stringPreferencesKey("password")].orEmpty() )
+    }
+    private fun Login()
+    {
+        lifecycleScope.launch(Dispatchers.IO){
+            getusers().collect{
+               withContext()
+                hola.text = it.name
+            }
         }
     }
 
