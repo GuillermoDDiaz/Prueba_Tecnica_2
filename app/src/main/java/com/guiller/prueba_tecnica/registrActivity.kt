@@ -22,6 +22,7 @@ class registrActivity : AppCompatActivity() {
     private lateinit var txtUser2: AppCompatEditText
     private lateinit var txtPass2:AppCompatEditText
     private lateinit var  txtPassVerif:AppCompatEditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registr)

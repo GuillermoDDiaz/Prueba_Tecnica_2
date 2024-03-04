@@ -13,28 +13,29 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.guiller.prueba_tecnica.classes.registred.Companion.pref
-import com.guiller.prueba_tecnica.databinding.ActivityMainBinding
+import com.guiller.prueba_tecnica.databinding.ActivityLoginBinding
+import com.guiller.prueba_tecnica.inicio.InicioAppActivity
 
 
 class loginActivity : AppCompatActivity() {
 
-private lateinit var binding: ActivityMainBinding
+private lateinit var binding: ActivityLoginBinding
 
-    private lateinit var txtUser: AppCompatEditText
-    private lateinit var txtPass: AppCompatEditText
-    private lateinit var btnReg: AppCompatButton
-    private lateinit var btnIngres: AppCompatButton
+    //private lateinit var txtUser: AppCompatEditText
+    //private lateinit var txtPass: AppCompatEditText
+    //private lateinit var btnReg: AppCompatButton
+    //private lateinit var btnIngres: AppCompatButton
 
 
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // binding = ActivityMainBinding.inflate(layoutInflater)
-       // setContentView(binding.root)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //setContentView(R.layout.activity_login)
 
-        initcomponet()
+        //initcomponet()
         focusChanged()
         listenerComponet()
 
@@ -42,16 +43,16 @@ private lateinit var binding: ActivityMainBinding
     }
 
     private fun initcomponet() {
-        txtUser = findViewById(R.id.txtUser)
-        txtPass = findViewById(R.id.txtPass)
-        btnReg = findViewById(R.id.btnReg)
-        btnIngres = findViewById(R.id.btnIngres)
+        //txtUser = findViewById(R.id.txtUser)
+        //txtPass = findViewById(R.id.txtPass)
+        //btnReg = findViewById(R.id.btnReg)
+        //btnIngres = findViewById(R.id.btnIngres)
 
 
     }
 
     private fun listenerComponet() {
-        btnReg.setOnClickListener {
+        binding.btnReg.setOnClickListener {
             if (checkNetwork(this)) {
                 val intent = Intent(this, registrActivity::class.java)
                 startActivity(intent)
@@ -63,10 +64,13 @@ private lateinit var binding: ActivityMainBinding
                 ).show()
             }
         }
-        btnIngres.setOnClickListener {
+        binding.btnIngres.setOnClickListener {
             if (checkNetwork(this)) {
                 if (validCamp()) {
-                    Login()
+                    if(Login()){
+                        val intent = Intent(this, InicioAppActivity::class.java)
+                        startActivity(intent)
+                    }
                 }else{
 
                     Toast.makeText(this, "Rellenar todos los campos", Toast.LENGTH_SHORT).show()
@@ -80,9 +84,9 @@ private lateinit var binding: ActivityMainBinding
     }
 
     private fun focusChanged() {
-        txtUser.setOnFocusChangeListener { V, hasFocus ->
+        binding.txtUser.setOnFocusChangeListener { V, hasFocus ->
             if (hasFocus) {
-                txtUser.setBackgroundDrawable(
+                binding.txtUser.setBackgroundDrawable(
                     ContextCompat.getDrawable(
                         this,
                         R.drawable.border_txt_select
@@ -90,7 +94,7 @@ private lateinit var binding: ActivityMainBinding
                 )
 
             } else {
-                txtUser.setBackgroundDrawable(
+                binding.txtUser.setBackgroundDrawable(
                     ContextCompat.getDrawable(
                         this,
                         R.drawable.border_txt
@@ -98,9 +102,9 @@ private lateinit var binding: ActivityMainBinding
                 )
             }
         }
-        txtPass.setOnFocusChangeListener { V, hasFocus ->
+        binding.txtPass.setOnFocusChangeListener { V, hasFocus ->
             if (hasFocus) {
-                txtPass.setBackgroundDrawable(
+                binding.txtPass.setBackgroundDrawable(
                     ContextCompat.getDrawable(
                         this,
                         R.drawable.border_txt_select
@@ -108,7 +112,7 @@ private lateinit var binding: ActivityMainBinding
                 )
 
             } else {
-                txtPass.setBackgroundDrawable(
+                binding.txtPass.setBackgroundDrawable(
                     ContextCompat.getDrawable(
                         this,
                         R.drawable.border_txt
@@ -122,8 +126,8 @@ private lateinit var binding: ActivityMainBinding
 
     private fun validCamp(): Boolean {
 
-        val us = txtUser.text.toString()
-        val pass = txtPass.text.toString()
+        val us = binding.txtUser.text.toString()
+        val pass = binding.txtPass.text.toString()
 
 
         return if (us.isEmpty() && pass.isEmpty()) {
@@ -146,7 +150,7 @@ private lateinit var binding: ActivityMainBinding
             }
 
             1 -> {
-                txtUser.setBackgroundDrawable(
+                binding.txtUser.setBackgroundDrawable(
                     ContextCompat.getDrawable(
                         this,
                         R.drawable.border_txt_error
@@ -156,7 +160,7 @@ private lateinit var binding: ActivityMainBinding
             }
 
             2 -> {
-                txtPass.setBackgroundDrawable(
+                binding.txtPass.setBackgroundDrawable(
                     ContextCompat.getDrawable(
                         this,
                         R.drawable.border_txt_error
@@ -166,13 +170,13 @@ private lateinit var binding: ActivityMainBinding
             }
 
             3 -> {
-                txtPass.setBackgroundDrawable(
+                binding.txtPass.setBackgroundDrawable(
                     ContextCompat.getDrawable(
                         this,
                         R.drawable.border_txt_error
                     )
                 )
-                txtUser.setBackgroundDrawable(
+                binding.txtUser.setBackgroundDrawable(
                     ContextCompat.getDrawable(
                         this,
                         R.drawable.border_txt_error
@@ -185,17 +189,23 @@ private lateinit var binding: ActivityMainBinding
         }
     }
 
-    private fun Login() {
+    private fun Login(): Boolean {
         if (pref.getName().isNotEmpty()) {
-            if (txtUser.text.toString() == pref.getUsername()) {
-                if (txtPass.text.toString() == pref.getPassword()) {
+            if (binding.txtUser.text.toString() == pref.getUsername()) {
+                if (binding.txtPass.text.toString() == pref.getPassword()) {
+
                     Toast.makeText(this, "El usuario es correcto", Toast.LENGTH_SHORT).show()
+                    return true
                 } else {
                     Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
+                    return false
                 }
             } else {
                 Toast.makeText(this,  "Usuario incorrecto", Toast.LENGTH_SHORT).show()
+                return false
             }
+        }else{
+             return false
         }
     }
 

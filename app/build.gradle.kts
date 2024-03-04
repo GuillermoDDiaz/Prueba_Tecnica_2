@@ -1,7 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-android-extensions")
+
+
+
 }
 
 android {
@@ -34,15 +36,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    viewBinding{
-        enable = true
-    }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
-    dataBinding{
+    dataBinding {
         enable = true
     }
+
+
 }
 
 dependencies {
@@ -59,6 +60,8 @@ dependencies {
 
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation("androidx.activity:activity-ktx:1.8.2")
+    implementation("androidx.activity:activity:1.8.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
