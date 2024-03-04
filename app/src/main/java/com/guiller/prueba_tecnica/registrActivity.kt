@@ -10,13 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-val Context.dataStore by preferencesDataStore(name = "Users")
+import com.guiller.prueba_tecnica.classes.registred.Companion.pref
+
 class registrActivity : AppCompatActivity() {
 
 
@@ -78,13 +73,15 @@ class registrActivity : AppCompatActivity() {
         txtPass2 = findViewById(R.id.txtPass2)
         txtPassVerif = findViewById(R.id.txtPassVerif)
     }
+
+
+
     private fun initListeners(){
         btnCancel.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         btnRegist.setOnClickListener {
             if(checkCamp()){
                 if(checkNetwork(this)){
-                   lifecycleScope.launch (Dispatchers.IO){
-                    saveDatas()}
+                    saveDatos()
                 }else
                 {
                     Toast.makeText(this, "No conexion a internet, intente nuevamente", Toast.LENGTH_SHORT).show()
@@ -120,6 +117,13 @@ class registrActivity : AppCompatActivity() {
             caseCamp(0)
         }
 
+
+    }
+    private fun saveDatos(){
+        pref.saveName(txtUserName.text.toString())
+        pref.saveUsernaame(txtUser2.text.toString())
+        pref.savePassword(txtPass2.text.toString())
+        Toast.makeText(this,"Guardado con exito",Toast.LENGTH_SHORT).show()
 
     }
     private fun caseCamp(case: Int):Boolean{
@@ -180,26 +184,17 @@ class registrActivity : AppCompatActivity() {
 
     }
     private fun compMayus(pass: String):Boolean{
-        var ret = true
         pass.forEach {
             if(it.isUpperCase())
                 return false
-            else
-                ret = true
         }
-        return ret
+        return true
 
     }
-    private suspend fun saveDatas(){
-        dataStore.edit {preferences ->
-            preferences[stringPreferencesKey("name")] = txtUserName.text.toString()
-            preferences[stringPreferencesKey("username")] = txtUser2.text.toString()
-            preferences[stringPreferencesKey("password")] = txtPass2.text.toString()
 
 
-        }
-    }
-    fun checkNetwork(context: Context): Boolean {
+
+    private fun checkNetwork(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (connectivityManager != null) {

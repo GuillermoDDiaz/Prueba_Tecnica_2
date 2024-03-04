@@ -13,18 +13,9 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
-import androidx.datastore.dataStore
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.lifecycle.lifecycleScope
-import com.guiller.prueba_tecnica.classes.getUser
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.guiller.prueba_tecnica.classes.registred.Companion.pref
 
 class loginActivity : AppCompatActivity() {
-
 
 
     private lateinit var txtUser: AppCompatEditText
@@ -42,8 +33,9 @@ class loginActivity : AppCompatActivity() {
         focusChanged()
         listenerComponet()
 
-        }
-    private fun initcomponet(){
+    }
+
+    private fun initcomponet() {
         txtUser = findViewById(R.id.txtUser)
         txtPass = findViewById(R.id.txtPass)
         btnReg = findViewById(R.id.btnReg)
@@ -51,100 +43,157 @@ class loginActivity : AppCompatActivity() {
         hola = findViewById(R.id.hola)
 
     }
-    private fun listenerComponet(){
+
+    private fun listenerComponet() {
         btnReg.setOnClickListener {
-            if(checkNetwork(this)){
-                val intent = Intent(this,registrActivity::class.java)
+            if (checkNetwork(this)) {
+                val intent = Intent(this, registrActivity::class.java)
                 startActivity(intent)
-            }else{
-                Toast.makeText(this, "No se pudo conectar, verifique la conexion a internet", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    this,
+                    "No se pudo conectar, verifique la conexion a internet",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
         btnIngres.setOnClickListener {
-            if(validCamp()){
-                Login()
-            }else
-            {
-                Toast.makeText(this, "Rellenar todos los campos", Toast.LENGTH_SHORT).show()
+            if (checkNetwork(this)) {
+                if (validCamp()) {
+                    Login()
+                }else{
+
+                    Toast.makeText(this, "Rellenar todos los campos", Toast.LENGTH_SHORT).show()
+                }
+
+            } else {
+                Toast.makeText(this, "No se pudo conectar, porfavor verifique su conexion a internet", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
+
     private fun focusChanged() {
         txtUser.setOnFocusChangeListener { V, hasFocus ->
             if (hasFocus) {
-                txtUser.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt_select))
+                txtUser.setBackgroundDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.border_txt_select
+                    )
+                )
 
             } else {
-                txtUser.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt))
+                txtUser.setBackgroundDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.border_txt
+                    )
+                )
             }
         }
         txtPass.setOnFocusChangeListener { V, hasFocus ->
             if (hasFocus) {
-                txtPass.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt_select))
+                txtPass.setBackgroundDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.border_txt_select
+                    )
+                )
 
             } else {
-                txtPass.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt))
+                txtPass.setBackgroundDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.border_txt
+                    )
+                )
             }
         }
 
 
-
     }
+
     private fun validCamp(): Boolean {
 
-        val us =txtUser.text.toString()
+        val us = txtUser.text.toString()
         val pass = txtPass.text.toString()
 
 
-        return if(us.isEmpty() && pass.isEmpty() ) {
+        return if (us.isEmpty() && pass.isEmpty()) {
             caseCamp(3)
-        }else if(us.isEmpty() ){
+        } else if (us.isEmpty()) {
             caseCamp(1)
 
-        }else if(pass.isEmpty()){
+        } else if (pass.isEmpty()) {
             caseCamp(2)
-        }else{
+        } else {
             true
         }
 
     }
-    private fun caseCamp(case: Int): Boolean{
-        return when(case){
-            0 ->{
+
+    private fun caseCamp(case: Int): Boolean {
+        return when (case) {
+            0 -> {
                 true
             }
 
-            1 ->{ txtUser.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt_error))
+            1 -> {
+                txtUser.setBackgroundDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.border_txt_error
+                    )
+                )
                 false
             }
 
-            2 -> {txtPass.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt_error))
+            2 -> {
+                txtPass.setBackgroundDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.border_txt_error
+                    )
+                )
                 false
             }
-            3 -> {txtPass.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt_error))
-                txtUser.setBackgroundDrawable(ContextCompat.getDrawable(this , R.drawable.border_txt_error))
+
+            3 -> {
+                txtPass.setBackgroundDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.border_txt_error
+                    )
+                )
+                txtUser.setBackgroundDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.border_txt_error
+                    )
+                )
                 false
             }
 
             else -> false
         }
     }
-    private fun getusers() = dataStore.data.map {preferences ->
-       getUser(name = preferences[stringPreferencesKey("name")].orEmpty(),
-           username = preferences[stringPreferencesKey("username")].orEmpty(),
-           password = preferences[stringPreferencesKey("password")].orEmpty() )
-    }
-    private fun Login()
-    {
-        lifecycleScope.launch(Dispatchers.IO){
-            getusers().collect{
-               withContext()
-                hola.text = it.name
+
+    private fun Login() {
+        if (pref.getName().isNotEmpty()) {
+            if (txtUser.text.toString() == pref.getUsername()) {
+                if (txtPass.text.toString() == pref.getPassword()) {
+                    Toast.makeText(this, "El usuario es correcto", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this,  "Usuario incorrecto", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    fun checkNetwork(context: Context): Boolean {
+    private fun checkNetwork(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (connectivityManager != null) {
@@ -165,8 +214,6 @@ class loginActivity : AppCompatActivity() {
         }
         return false
     }
-
-
 
 
 }
