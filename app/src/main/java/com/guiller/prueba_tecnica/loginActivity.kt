@@ -8,30 +8,36 @@ import android.net.NetworkCapabilities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.guiller.prueba_tecnica.classes.registred.Companion.pref
+import com.guiller.prueba_tecnica.databinding.ActivityMainBinding
+
 
 class loginActivity : AppCompatActivity() {
 
+private lateinit var binding: ActivityMainBinding
 
     private lateinit var txtUser: AppCompatEditText
     private lateinit var txtPass: AppCompatEditText
     private lateinit var btnReg: AppCompatButton
     private lateinit var btnIngres: AppCompatButton
-    private lateinit var hola: TextView
+
+
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+       // binding = ActivityMainBinding.inflate(layoutInflater)
+       // setContentView(binding.root)
         setContentView(R.layout.activity_login)
 
         initcomponet()
         focusChanged()
         listenerComponet()
+
 
     }
 
@@ -40,7 +46,7 @@ class loginActivity : AppCompatActivity() {
         txtPass = findViewById(R.id.txtPass)
         btnReg = findViewById(R.id.btnReg)
         btnIngres = findViewById(R.id.btnIngres)
-        hola = findViewById(R.id.hola)
+
 
     }
 
@@ -195,7 +201,7 @@ class loginActivity : AppCompatActivity() {
 
     private fun checkNetwork(context: Context): Boolean {
         val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         if (connectivityManager != null) {
             val capabilities =
                 connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
