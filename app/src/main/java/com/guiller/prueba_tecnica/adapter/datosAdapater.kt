@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.guiller.prueba_tecnica.R
-import com.guiller.prueba_tecnica.classes.Datos
+import com.guiller.prueba_tecnica.datoApi.dataApi
+import com.guiller.prueba_tecnica.datoApi.dataApiItem
 
-class datosAdapater(private val listadatos:List<Datos>): RecyclerView.Adapter<datosHolder>() {
+class datosAdapater(private val listadatos:List< dataApiItem>): RecyclerView.Adapter<datosHolder>() {
+//class datosAdapater(private val listadatos:List<Datos>): RecyclerView.Adapter<datosHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): datosHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return datosHolder(layoutInflater.inflate(R.layout.itme_datos, parent, false))

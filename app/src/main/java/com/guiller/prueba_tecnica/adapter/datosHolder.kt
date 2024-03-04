@@ -1,21 +1,20 @@
 package com.guiller.prueba_tecnica.adapter
 
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.guiller.prueba_tecnica.R
+import com.bumptech.glide.Glide
 import com.guiller.prueba_tecnica.classes.Datos
+import com.guiller.prueba_tecnica.databinding.ItmeDatosBinding
+import com.guiller.prueba_tecnica.datoApi.dataApi
+import com.guiller.prueba_tecnica.datoApi.dataApiItem
 
 class datosHolder (view:View): RecyclerView.ViewHolder(view){
-    val name1 = view.findViewById<TextView>(R.id.name)
-    val apellido = view.findViewById<TextView>(R.id.apellido)
-    val imgA = view.findViewById<ImageView>(R.id.imgA)
+    val binding = ItmeDatosBinding.bind(view)
 
-    fun render(datos: Datos){
-        name1.text = datos.superH
-        apellido.text = datos.apellido
-
-
+    fun render(datos: dataApiItem){
+        binding.txtId.text = datos.id
+        binding.txtNames.text = datos.name
+        binding.txtPpu.text = datos.ppu.toString()
+        binding.txtType.text = datos.type
     }
 }
