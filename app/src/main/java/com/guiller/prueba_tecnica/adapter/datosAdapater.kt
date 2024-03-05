@@ -7,7 +7,7 @@ import com.guiller.prueba_tecnica.R
 import com.guiller.prueba_tecnica.datoApi.dataApi
 import com.guiller.prueba_tecnica.datoApi.dataApiItem
 
-class datosAdapater(private val listadatos:List< dataApiItem>): RecyclerView.Adapter<datosHolder>() {
+class datosAdapater(private val listadatos:ArrayList<dataApiItem>): RecyclerView.Adapter<datosHolder>() {
 //class datosAdapater(private val listadatos:List<Datos>): RecyclerView.Adapter<datosHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): datosHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

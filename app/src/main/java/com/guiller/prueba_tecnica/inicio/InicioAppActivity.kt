@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.guiller.prueba_tecnica.adapter.datosAdapater
 import com.guiller.prueba_tecnica.databinding.ActivityInicioAppBinding
 import com.guiller.prueba_tecnica.datoApi.RetrofitClient
+import com.guiller.prueba_tecnica.datoApi.dataApi
 import com.guiller.prueba_tecnica.datoApi.dataApiItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class InicioAppActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInicioAppBinding
     private  lateinit var adapter: datosAdapater
-    private lateinit var cadenas: List<dataApiItem>
+    private val cadenas = mutableListOf<dataApiItem>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInicioAppBinding.inflate(layoutInflater)
@@ -50,9 +51,10 @@ class InicioAppActivity : AppCompatActivity() {
                     //val batters = response?.batters
                     //val topping = response?.topping ?: emptyList()
 
-                    if (response != null) {
+                    cadenas.clear()
+                    cadenas.addAll(response)
                         cadenas = response
-                    }
+
 
                 }else{
                     Toast.makeText(this@InicioAppActivity, "No se devolvio nada", Toast.LENGTH_SHORT).show()
