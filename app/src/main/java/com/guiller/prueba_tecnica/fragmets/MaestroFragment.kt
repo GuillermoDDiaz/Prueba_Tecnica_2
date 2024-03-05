@@ -6,40 +6,55 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.guiller.prueba_tecnica.R
+import com.guiller.prueba_tecnica.adapter.datosAdapater
+import com.guiller.prueba_tecnica.api.RespnseApi
+import com.guiller.prueba_tecnica.api.RespnseApiItem
+import com.guiller.prueba_tecnica.api.retrofit
 import com.guiller.prueba_tecnica.databinding.FragmentMaestroBinding
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import com.guiller.prueba_tecnica.inicio.InicioAppActivity.Companion.Getcadena
 
 class MaestroFragment : Fragment() {
     private var _binding:FragmentMaestroBinding? = null
     private val binding  get() = _binding!!
+
 
     private var id: String? = null
     private var name: String? = null
     private var type:String? = null
     private var ppu: String? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            id =  it.getString(ARG_PARAM1)
-            name = it.getString(ARG_PARAM2)
-            type = it.getString(ARG_PARAM3)
-            ppu = it.getString(ARG_PARAM4)
+
 
         }
-
-
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecicle()
+    }
+    private fun initRecicle(){
+        val cadenas = Getcadena()!!
+        binding.rw1.layoutManager = LinearLayoutManager(context)
+        binding.rw1.adapter = datosAdapater(cadenas){ Seleccionado(it) }
 
     }
+    fun Seleccionado(datos: RespnseApiItem) {
 
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        binding.txtIdF.text = id.toString()
-        binding.txtNameF.text = name.toString()
-        binding.txtTypeF.text = type.toString()
-        binding.txtPpuF.text = ppu.toString()
+
     }
 
 

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp">
+
         <ImageView
             android:id="@+id/imgDonut"
             android:layout_width="100dp"
@@ -30,44 +30,24 @@
             android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:text="@string/id"
+            android:textSize="20sp"
 
             app:layout_constraintStart_toEndOf="@id/imgDonut"
             app:layout_constraintTop_toTopOf="parent"
             />
 
         <TextView
-            android:id="@+id/txtIdF"
+            android:id="@+id/txtIdFd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@id/tid"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="000102" />
-
-        <TextView
-            android:id="@+id/tNameF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:text="@string/name"
-
-            app:layout_constraintStart_toEndOf="@id/txtIdF"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="10dp"
+            tools:text="000102"
             />
 
-        <TextView
-            android:id="@+id/txtNameF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-
-            app:layout_constraintStart_toEndOf="@id/tNameF"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Donnut ja" />
 
         <TextView
             android:id="@+id/tTypeF"
@@ -76,47 +56,24 @@
             android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:text="@string/type"
-
+            android:textSize="20sp"
             android:layout_marginVertical="20dp"
             app:layout_constraintStart_toEndOf="@id/imgDonut"
             app:layout_constraintTop_toBottomOf="@id/tid"
             />
 
         <TextView
-            android:id="@+id/txtTypeF"
+            android:id="@+id/txtTypeFd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-
+            android:textSize="20sp"
             android:layout_marginVertical="20dp"
             app:layout_constraintStart_toEndOf="@id/tTypeF"
             app:layout_constraintTop_toBottomOf="@id/tid"
             tools:text="type:" />
 
-        <TextView
-            android:id="@+id/tPpuF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:text="@string/ppu"
-            android:layout_marginLeft="10dp"
-            android:layout_marginVertical="20dp"
-            app:layout_constraintStart_toEndOf="@id/txtTypeF"
-            app:layout_constraintTop_toBottomOf="@id/tid"
-            />
 
-        <TextView
-            android:id="@+id/txtPpuF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-
-            android:layout_marginVertical="20dp"
-            app:layout_constraintStart_toEndOf="@id/tPpuF"
-            app:layout_constraintTop_toBottomOf="@id/tid"
-            tools:text="0.55" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

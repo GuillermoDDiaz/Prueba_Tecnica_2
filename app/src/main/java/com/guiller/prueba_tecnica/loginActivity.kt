@@ -17,6 +17,7 @@ import com.guiller.prueba_tecnica.databinding.ActivityLoginBinding
 import com.guiller.prueba_tecnica.inicio.InicioAppActivity
 
 
+
 class loginActivity : AppCompatActivity() {
 
 private lateinit var binding: ActivityLoginBinding

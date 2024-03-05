@@ -25,24 +25,13 @@ import java.util.jar.Attributes.Name
 
 class InicioAppActivity : AppCompatActivity() {
 
-    companion object {
-        var Id: String? = null
-        var Name: String? = null
-        var Type:String? = null
-        var Ppu: String? = null
-        fun itemClick(id: String, type: String, ppu: String, name: String) {
-            Id = id
-            Type = type
-            Name = name
-            Ppu = ppu
-
-
-            }
+companion object{
+    private var cad: RespnseApi? = null
+    fun Getcadena(): RespnseApi? {
+        return cad
     }
-    private var id= Id
-    private var name = Name
-    private var type = Type
-    private var ppu = Ppu
+}
+
     private lateinit var binding: ActivityInicioAppBinding
     private lateinit var adapter: datosAdapater
 
@@ -53,19 +42,14 @@ class InicioAppActivity : AppCompatActivity() {
         setContentView(binding.root)
         //setContentView(R.layout.activity_inicio_app)
         Peticion()
-        getFragmet()
 
 
 
-    }
-    fun getFragmet(){
-
-
-        binding.rw1.setOnClickListener{
-
-        }
 
     }
+
+
+
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://mocki.io/")
@@ -76,30 +60,50 @@ class InicioAppActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val service = getRetrofit().create(retrofit::class.java).datosGet()
             runOnUiThread {
-                initRecycle(service)
+                cad = service
+                val bundle = bundleOf(
+
+                )
+                supportFragmentManager.commit {
+                    setReorderingAllowed(true)
+                    add<MaestroFragment>(R.id.FragMaest, args = bundle)
             }
 
         }
     }
-
-    private fun initRecycle(cadenas: RespnseApi) {
-
-        binding.rw1.layoutManager =
-            LinearLayoutManager(this) // vista de layout si quier diferente columas se agrega otro
-        //adapter = datosAdapater(cadenas)
-        binding.rw1.adapter = datosAdapater(cadenas){Seleccionado(it)}
-
-
     }
-    fun Seleccionado(datos:RespnseApiItem){
-        Toast.makeText(this,datos.id,Toast.LENGTH_SHORT).show()
-        binding.rw1.visibility = View.INVISIBLE
-        val bundle = bundleOf("param1" to datos.id.toString(), "param2" to datos.type.toString() , "param3" to datos.ppu.toString(), "param4" to datos.name)
-        supportFragmentManager.commit {
-            setReorderingAllowed(true)
-            add<MaestroFragment>(R.id.FragMaest, args = bundle)
-        }
+  //  private fun initRecycle(cadenas: RespnseApi) {
+//
+  //      binding.rw1.layoutManager =
+  //          LinearLayoutManager(this) // vista de layout si quier diferente columas se agrega otro
+  //      //adapter = datosAdapater(cadenas)
+  //      binding.rw1.adapter = datosAdapater(cadenas) { Seleccionado(it) }
+  //  }
 
-    }
+   // private fun initRecycle(cadenas: RespnseApi) {
+//
+   //     binding.rw1.layoutManager =
+   //         LinearLayoutManager(this) // vista de layout si quier diferente columas se agrega otro
+   //     //adapter = datosAdapater(cadenas)
+   //     binding.rw1.adapter = datosAdapater(cadenas){Seleccionado(it)}
+//
+//
+   // }
+   // fun Seleccionado(datos:RespnseApiItem) {
+   // Toast.makeText(this, datos.id, Toast.LENGTH_SHORT).show()
+   // //binding.rw1.visibility = View.INVISIBLE
+   // val bundle = bundleOf(
+   //     "param1" to datos.id.toString(),
+   //     "param2" to datos.type.toString(),
+   //     "param3" to datos.ppu.toString(),
+   //     "param4" to datos.name
+   //
+   // )
+   // supportFragmentManager.commit {
+   //     setReorderingAllowed(true)
+   //     add<MaestroFragment>(R.id.FragMaest, args = bundle)
+   // }
+
+   //
 
 }

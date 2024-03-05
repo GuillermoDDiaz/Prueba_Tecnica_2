@@ -6,7 +6,7 @@ import com.guiller.prueba_tecnica.api.Batter
 import com.guiller.prueba_tecnica.api.RespnseApi
 import com.guiller.prueba_tecnica.api.RespnseApiItem
 import com.guiller.prueba_tecnica.databinding.ItmeDatosBinding
-import com.guiller.prueba_tecnica.inicio.InicioAppActivity.Companion.itemClick
+
 
 class datosHolder (view:View): RecyclerView.ViewHolder(view){
     val binding = ItmeDatosBinding.bind(view)
