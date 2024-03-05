@@ -1,4 +1,4 @@
-package com.guiller.prueba_tecnica.datoApi
+package com.guiller.prueba_tecnica.api
 
 data class Topping(
     val id: String,

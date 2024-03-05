@@ -13,5 +13,8 @@
     <string name="examp_hint_2">juan123</string>
     <string name="registro">Registrar</string>
     <string name="cancel">Cancelar</string>
-
+    <string name="id">ID:</string>
+    <string name="name">Name:</string>
+    <string name="type">Type:</string>
+    <string name="ppu">ppu:</string>
 </resources>

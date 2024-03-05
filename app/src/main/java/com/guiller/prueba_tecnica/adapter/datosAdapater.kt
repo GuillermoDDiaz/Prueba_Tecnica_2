@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.guiller.prueba_tecnica.R
-import com.guiller.prueba_tecnica.datoApi.dataApi
-import com.guiller.prueba_tecnica.datoApi.dataApiItem
+import com.guiller.prueba_tecnica.api.RespnseApi
+import com.guiller.prueba_tecnica.api.RespnseApiItem
 
-class datosAdapater(private val listadatos:ArrayList<dataApiItem>): RecyclerView.Adapter<datosHolder>() {
+class datosAdapater(private val listadatos:RespnseApi,private val onclick:(RespnseApiItem)-> Unit): RecyclerView.Adapter<datosHolder>() {
 //class datosAdapater(private val listadatos:List<Datos>): RecyclerView.Adapter<datosHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): datosHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -19,7 +19,7 @@ class datosAdapater(private val listadatos:ArrayList<dataApiItem>): RecyclerView
 
     override fun onBindViewHolder(holder: datosHolder, position: Int) { //Pasa por cada uno de los items y devuelve la posicion
         val item = listadatos[position]
-        holder.render(item)
+        holder.render(item,onclick)
 
     }
 
