@@ -14,10 +14,10 @@ class datosHolder (view:View): RecyclerView.ViewHolder(view){
 
     fun render(datos: RespnseApiItem, onclick:(RespnseApiItem)-> Unit){
 
-        binding.txtId.text = datos.id
-        binding.txtNames.text = datos.name
-        binding.txtPpu.text = datos.ppu.toString()
-        binding.txtType.text = datos.type
+        binding.txtIdF.text = datos.id
+        binding.txtNameF.text = datos.name
+        binding.txtPpuF.text = datos.ppu.toString()
+        binding.txtTypeF.text = datos.type
 
         itemView.setOnClickListener{ onclick(datos) }
     }
