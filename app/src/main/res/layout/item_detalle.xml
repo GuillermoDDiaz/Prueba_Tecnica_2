@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     app:cardBackgroundColor="@color/secondary"
     app:cardCornerRadius="15dp"
-    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingClass">
 
-    >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,8 +16,9 @@
 
         <ImageView
             android:id="@+id/imgDonut"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/donut"
             android:src="@drawable/donut"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,52 +28,38 @@
             android:id="@+id/tid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
+            android:layout_marginTop="5dp"
             android:text="@string/id"
-            android:textSize="20sp"
-
-            app:layout_constraintStart_toEndOf="@id/imgDonut"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
-        <TextView
-            android:id="@+id/txtIdFd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@id/tid"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="000102"
-            />
-
-
-        <TextView
-            android:id="@+id/tTypeF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:text="@string/type"
-            android:textSize="20sp"
-            android:layout_marginVertical="20dp"
             app:layout_constraintStart_toEndOf="@id/imgDonut"
-            app:layout_constraintTop_toBottomOf="@id/tid"
+            app:layout_constraintTop_toBottomOf="@id/txtTypeF"
             />
 
         <TextView
-            android:id="@+id/txtTypeFd"
+            android:id="@+id/txtIdF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:layout_marginVertical="20dp"
-            app:layout_constraintStart_toEndOf="@id/tTypeF"
-            app:layout_constraintTop_toBottomOf="@id/tid"
-            tools:text="type:" />
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/tid"
+            app:layout_constraintTop_toBottomOf="@id/txtTypeF"
+            tools:text="000102" />
+
+
+        <TextView
+            android:id="@+id/txtTypeF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="3dp"
+            android:layout_marginStart="5dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/imgDonut"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Donut sould"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

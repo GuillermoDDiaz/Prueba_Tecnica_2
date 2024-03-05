@@ -10,11 +10,15 @@ import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.guiller.prueba_tecnica.R
 import com.guiller.prueba_tecnica.adapter.datosAdapater
+import com.guiller.prueba_tecnica.api.Batter
 import com.guiller.prueba_tecnica.api.RespnseApi
 import com.guiller.prueba_tecnica.api.RespnseApiItem
+import com.guiller.prueba_tecnica.api.Topping
 import com.guiller.prueba_tecnica.api.retrofit
 import com.guiller.prueba_tecnica.databinding.ActivityInicioAppBinding
+import com.guiller.prueba_tecnica.fragmets.DetalleFragment
 import com.guiller.prueba_tecnica.fragmets.MaestroFragment
+import com.guiller.prueba_tecnica.interfac.passDetalel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,12 +27,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.jar.Attributes.Name
 
 
-class InicioAppActivity : AppCompatActivity() {
+class InicioAppActivity : AppCompatActivity(), passDetalel{
 
 companion object{
     private var cad: RespnseApi? = null
+    private var topp: List<Topping>? = null
+    private var batter: List<Batter>? = null
     fun Getcadena(): RespnseApi? {
         return cad
+    }
+    fun GetTopp(): List<Topping>? {
+        return topp
+    }
+    fun GetBatter(): List<Batter>? {
+        return batter
     }
 }
 
@@ -42,10 +54,6 @@ companion object{
         setContentView(binding.root)
         //setContentView(R.layout.activity_inicio_app)
         Peticion()
-
-
-
-
     }
 
 
@@ -62,7 +70,6 @@ companion object{
             runOnUiThread {
                 cad = service
                 val bundle = bundleOf(
-
                 )
                 supportFragmentManager.commit {
                     setReorderingAllowed(true)
@@ -71,39 +78,18 @@ companion object{
 
         }
     }
+
     }
-  //  private fun initRecycle(cadenas: RespnseApi) {
-//
-  //      binding.rw1.layoutManager =
-  //          LinearLayoutManager(this) // vista de layout si quier diferente columas se agrega otro
-  //      //adapter = datosAdapater(cadenas)
-  //      binding.rw1.adapter = datosAdapater(cadenas) { Seleccionado(it) }
-  //  }
 
-   // private fun initRecycle(cadenas: RespnseApi) {
-//
-   //     binding.rw1.layoutManager =
-   //         LinearLayoutManager(this) // vista de layout si quier diferente columas se agrega otro
-   //     //adapter = datosAdapater(cadenas)
-   //     binding.rw1.adapter = datosAdapater(cadenas){Seleccionado(it)}
-//
-//
-   // }
-   // fun Seleccionado(datos:RespnseApiItem) {
-   // Toast.makeText(this, datos.id, Toast.LENGTH_SHORT).show()
-   // //binding.rw1.visibility = View.INVISIBLE
-   // val bundle = bundleOf(
-   //     "param1" to datos.id.toString(),
-   //     "param2" to datos.type.toString(),
-   //     "param3" to datos.ppu.toString(),
-   //     "param4" to datos.name
-   //
-   // )
-   // supportFragmentManager.commit {
-   //     setReorderingAllowed(true)
-   //     add<MaestroFragment>(R.id.FragMaest, args = bundle)
-   // }
 
-   //
 
+    override fun datoDetalle(data: List<Topping>,dataB:List<Batter>) {
+        topp = null
+        topp = data
+        batter = null
+         batter = dataB
+        supportFragmentManager.beginTransaction().replace(R.id.FragDetalle,DetalleFragment()).commit()
+
+
+}
 }
