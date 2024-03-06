@@ -73,7 +73,6 @@ class loginActivity : AppCompatActivity() {
         }
 
     }
-
     private fun focusChanged() {
         binding.txtUser.setOnFocusChangeListener { V, hasFocus ->
             if (hasFocus) {
@@ -114,7 +113,6 @@ class loginActivity : AppCompatActivity() {
 
 
     }
-
     private fun validCamp(): Boolean {
 
         val us = binding.txtUser.text.toString()
@@ -133,7 +131,6 @@ class loginActivity : AppCompatActivity() {
         }
 
     }
-
     private fun caseCamp(case: Int): Boolean {
         return when (case) {
             0 -> {
@@ -179,22 +176,21 @@ class loginActivity : AppCompatActivity() {
             else -> false
         }
     }
-
     private fun Login(): Boolean {
         if (pref.getName().isNotEmpty()) {
-            if (binding.txtUser.text.toString() == pref.getUsername()) {
+            return if (binding.txtUser.text.toString() == pref.getUsername()) {
                 if (binding.txtPass.text.toString() == pref.getPassword()) {
                     nombre = pref.getName()
 
                     Toast.makeText(this, "El usuario es correcto", Toast.LENGTH_SHORT).show()
-                    return true
+                    true
                 } else {
                     Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
-                    return false
+                    false
                 }
             } else {
                 Toast.makeText(this, "Usuario incorrecto", Toast.LENGTH_SHORT).show()
-                return false
+                false
             }
         } else {
             return false

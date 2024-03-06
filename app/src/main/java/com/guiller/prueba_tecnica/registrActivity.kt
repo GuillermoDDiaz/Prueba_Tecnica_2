@@ -65,7 +65,6 @@ class registrActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun initComponet(){
         btnCancel = findViewById(R.id.btnCancel)
         btnRegist = findViewById(R.id.btnRegist)
@@ -74,9 +73,6 @@ class registrActivity : AppCompatActivity() {
         txtPass2 = findViewById(R.id.txtPass2)
         txtPassVerif = findViewById(R.id.txtPassVerif)
     }
-
-
-
     private fun initListeners(){
         btnCancel.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         btnRegist.setOnClickListener {
