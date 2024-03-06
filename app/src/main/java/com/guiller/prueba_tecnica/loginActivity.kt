@@ -9,24 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.guiller.prueba_tecnica.classes.registred.Companion.pref
 import com.guiller.prueba_tecnica.databinding.ActivityLoginBinding
 import com.guiller.prueba_tecnica.inicio.InicioAppActivity
 
 
-
 class loginActivity : AppCompatActivity() {
 
-private lateinit var binding: ActivityLoginBinding
-
-    //private lateinit var txtUser: AppCompatEditText
-    //private lateinit var txtPass: AppCompatEditText
-    //private lateinit var btnReg: AppCompatButton
-    //private lateinit var btnIngres: AppCompatButton
-
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var nombre: String
 
 
     @SuppressLint("ResourceType")
@@ -34,23 +26,15 @@ private lateinit var binding: ActivityLoginBinding
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //setContentView(R.layout.activity_login)
 
-        //initcomponet()
+
+
         focusChanged()
         listenerComponet()
 
 
     }
 
-    private fun initcomponet() {
-        //txtUser = findViewById(R.id.txtUser)
-        //txtPass = findViewById(R.id.txtPass)
-        //btnReg = findViewById(R.id.btnReg)
-        //btnIngres = findViewById(R.id.btnIngres)
-
-
-    }
 
     private fun listenerComponet() {
         binding.btnReg.setOnClickListener {
@@ -68,18 +52,23 @@ private lateinit var binding: ActivityLoginBinding
         binding.btnIngres.setOnClickListener {
             if (checkNetwork(this)) {
                 if (validCamp()) {
-                    if(Login()){
+                    if (Login()) {
                         val intent = Intent(this, InicioAppActivity::class.java)
-                        intent.putExtra("nombre",)
+                        intent.putExtra("nombre",nombre)
+                        clear()
                         startActivity(intent)
                     }
-                }else{
+                } else {
 
                     Toast.makeText(this, "Rellenar todos los campos", Toast.LENGTH_SHORT).show()
                 }
 
             } else {
-                Toast.makeText(this, "No se pudo conectar, porfavor verifique su conexion a internet", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "No se pudo conectar, porfavor verifique su conexion a internet",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -195,6 +184,7 @@ private lateinit var binding: ActivityLoginBinding
         if (pref.getName().isNotEmpty()) {
             if (binding.txtUser.text.toString() == pref.getUsername()) {
                 if (binding.txtPass.text.toString() == pref.getPassword()) {
+                    nombre = pref.getName()
 
                     Toast.makeText(this, "El usuario es correcto", Toast.LENGTH_SHORT).show()
                     return true
@@ -203,12 +193,17 @@ private lateinit var binding: ActivityLoginBinding
                     return false
                 }
             } else {
-                Toast.makeText(this,  "Usuario incorrecto", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Usuario incorrecto", Toast.LENGTH_SHORT).show()
                 return false
             }
-        }else{
-             return false
+        } else {
+            return false
         }
+    }
+    private fun clear(){
+        binding.txtUser.text = null
+        binding.txtPass.text = null
+
     }
 
     private fun checkNetwork(context: Context): Boolean {

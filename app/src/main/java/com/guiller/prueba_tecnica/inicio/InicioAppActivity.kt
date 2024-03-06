@@ -1,21 +1,14 @@
 package com.guiller.prueba_tecnica.inicio
 
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.View
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.guiller.prueba_tecnica.R
-import com.guiller.prueba_tecnica.adapter.datosAdapater
 import com.guiller.prueba_tecnica.api.Batter
 import com.guiller.prueba_tecnica.api.RespnseApi
-import com.guiller.prueba_tecnica.api.RespnseApiItem
 import com.guiller.prueba_tecnica.api.Topping
 import com.guiller.prueba_tecnica.api.retrofit
 import com.guiller.prueba_tecnica.databinding.ActivityInicioAppBinding
@@ -27,7 +20,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.jar.Attributes.Name
 
 
 class InicioAppActivity() : AppCompatActivity(), passDetalel {
@@ -49,9 +41,9 @@ class InicioAppActivity() : AppCompatActivity(), passDetalel {
         setContentView(binding.root)
 
         //setContentView(R.layout.activity_inicio_app)
-        val nombre=
+        val nombre= intent.extras?.getString("nombre") ?: "username"
         Peticion()
-        saludar("Juancho")
+        saludar(nombre)
         pressBack()
 
     }

@@ -83,6 +83,8 @@ class registrActivity : AppCompatActivity() {
             if(checkCamp()){
                 if(checkNetwork(this)){
                     saveDatos()
+                    clear()
+                    onBackPressedDispatcher.onBackPressed()
                 }else
                 {
                     Toast.makeText(this, "No conexion a internet, intente nuevamente", Toast.LENGTH_SHORT).show()
@@ -192,9 +194,12 @@ class registrActivity : AppCompatActivity() {
         return true
 
     }
-
-
-
+    private fun clear(){
+        txtUserName.text = null
+        txtUser2.text = null
+        txtPass2.text = null
+        txtPassVerif.text = null
+    }
     private fun checkNetwork(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
