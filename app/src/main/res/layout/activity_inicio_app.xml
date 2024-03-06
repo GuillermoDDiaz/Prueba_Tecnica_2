@@ -3,46 +3,81 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@color/secondary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".inicio.InicioAppActivity"
-    android:background="@color/white">
+    tools:context=".inicio.InicioAppActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/primary">
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
 
+
             />
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <TextView
+        android:id="@+id/TWTit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/listado_coockies"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/FragMaest"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolBar"
+        android:layout_height="240dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/border_card"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/TWTitI"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TWTit" />
+
+    <TextView
+        android:id="@+id/TWTitI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detalle_coockies"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:layout_marginVertical="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/FragDetalle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/FragDetalle"/>
+        app:layout_constraintTop_toBottomOf="@id/FragMaest" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/FragDetalle"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        app:layout_constraintTop_toBottomOf="@+id/FragMaest"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:background="@drawable/border_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/TWTitI"
+
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

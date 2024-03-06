@@ -20,4 +20,8 @@
     <string name="donut">Donut</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="topping">Topping</string>
+    <string name="batter">Batter</string>
+    <string name="listado_coockies">Listado Coockie\'s</string>
+    <string name="detalle_coockies">Detalle coockie\'s</string>
 </resources>

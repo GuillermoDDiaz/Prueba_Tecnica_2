@@ -70,6 +70,7 @@ private lateinit var binding: ActivityLoginBinding
                 if (validCamp()) {
                     if(Login()){
                         val intent = Intent(this, InicioAppActivity::class.java)
+                        intent.putExtra("nombre",)
                         startActivity(intent)
                     }
                 }else{

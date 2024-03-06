@@ -6,13 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.guiller.prueba_tecnica.R
 import com.guiller.prueba_tecnica.adapter.batterAdapter
-import com.guiller.prueba_tecnica.adapter.datosAdapater
 import com.guiller.prueba_tecnica.adapter.detalleAdapter
+import com.guiller.prueba_tecnica.inicio.InicioAppActivity.Companion.getBattter
+import com.guiller.prueba_tecnica.inicio.InicioAppActivity.Companion.getTopping
 import com.guiller.prueba_tecnica.databinding.FragmentDetalleBinding
-import com.guiller.prueba_tecnica.databinding.FragmentMaestroBinding
-import com.guiller.prueba_tecnica.inicio.InicioAppActivity
+
 
 
 private const val ARG_PARAM1 = "param1"
@@ -21,10 +20,11 @@ private const val ARG_PARAM2 = "param2"
 
 class DetalleFragment : Fragment() {
 
+
     private var param1: String? = null
     private var param2: String? = null
     private var _binding: FragmentDetalleBinding? = null
-    private lateinit var adapter: detalleAdapter
+
     private val binding  get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class DetalleFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentDetalleBinding.inflate(inflater,container, false)
         return binding.root
@@ -50,25 +50,10 @@ class DetalleFragment : Fragment() {
         initRecicle()
     }
     private fun initRecicle(){
-        val topping = InicioAppActivity.GetTopp()!!
-        val batters = InicioAppActivity.GetBatter()!!
         binding.rw2.layoutManager = LinearLayoutManager(context)
-        binding.rw2.adapter = detalleAdapter(topping)
+        binding.rw2.adapter = detalleAdapter(getTopping())
         binding.rw3.layoutManager = LinearLayoutManager(context)
-        binding.rw3.adapter = batterAdapter(batters)
+        binding.rw3.adapter = batterAdapter(getBattter())
     }
 
-
-
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetalleFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

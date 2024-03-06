@@ -1,8 +1,11 @@
 package com.guiller.prueba_tecnica.inicio
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
@@ -27,69 +30,89 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.jar.Attributes.Name
 
 
-class InicioAppActivity : AppCompatActivity(), passDetalel{
+class InicioAppActivity() : AppCompatActivity(), passDetalel {
 
-companion object{
-    private var cad: RespnseApi? = null
-    private var topp: List<Topping>? = null
-    private var batter: List<Batter>? = null
-    fun Getcadena(): RespnseApi? {
-        return cad
+    companion object {
+        private lateinit var topping: List<Topping>
+        private lateinit var batters: List<Batter>
+        private lateinit var respon: RespnseApi
+        fun getResponse(): RespnseApi = respon
+        fun getBattter(): List<Batter> = batters
+        fun getTopping(): List<Topping> = topping
     }
-    fun GetTopp(): List<Topping>? {
-        return topp
-    }
-    fun GetBatter(): List<Batter>? {
-        return batter
-    }
-}
 
     private lateinit var binding: ActivityInicioAppBinding
-    private lateinit var adapter: datosAdapater
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInicioAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         //setContentView(R.layout.activity_inicio_app)
+        val nombre=
         Peticion()
+        saludar("Juancho")
+        pressBack()
+
     }
 
+    private fun saludar(usuario: String) {
+        val builder = AlertDialog.Builder(this@InicioAppActivity)
+        builder.setTitle("Bienvenido")
+        builder.setMessage("Hola $usuario")
+        builder.setPositiveButton(android.R.string.ok) { dialog, which ->
+        }
+        builder.show()
+    }
+
+    private fun pressBack() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val builder = AlertDialog.Builder(this@InicioAppActivity)
+                builder.setTitle("Salir")
+                builder.setMessage("Esta seguro que desea salir")
+                builder.setPositiveButton(android.R.string.ok) { dialog, which ->
+                    finish()
+                }
+                builder.setNegativeButton("Cancelar", null)
+                builder.show()
 
 
-    private fun getRetrofit(): Retrofit {
+            }
+        })
+
+    }
+
+    private fun getRetrofit(): retrofit {
         return Retrofit.Builder()
             .baseUrl("https://mocki.io/")
             .addConverterFactory(GsonConverterFactory.create()).build()
+            .create(retrofit::class.java)
     }
 
     private fun Peticion() {
         CoroutineScope(Dispatchers.IO).launch {
-            val service = getRetrofit().create(retrofit::class.java).datosGet()
+            val service = getRetrofit().datosGet()
             runOnUiThread {
-                cad = service
-                val bundle = bundleOf(
-                )
+                respon = service
                 supportFragmentManager.commit {
                     setReorderingAllowed(true)
-                    add<MaestroFragment>(R.id.FragMaest, args = bundle)
+                    add<MaestroFragment>(R.id.FragMaest)
+                }
+
             }
-
         }
-    }
 
     }
 
 
+    override fun datoDetalle(data: List<Topping>, dataB: List<Batter>) {
 
-    override fun datoDetalle(data: List<Topping>,dataB:List<Batter>) {
-        topp = null
-        topp = data
-        batter = null
-         batter = dataB
-        supportFragmentManager.beginTransaction().replace(R.id.FragDetalle,DetalleFragment()).commit()
+        topping = data
+        batters = dataB
+        supportFragmentManager.beginTransaction().replace(R.id.FragDetalle, DetalleFragment())
+            .commit()
 
 
-}
+    }
 }
