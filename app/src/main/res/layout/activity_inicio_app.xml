@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         >
 <TextView
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:text="@string/donut"
@@ -34,7 +34,8 @@
             android:layout_height="match_parent"
             android:src="@drawable/exit"
             android:background="@color/primary"
-            android:layout_marginEnd="5dp"/>
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@string/byt"/>
     </LinearLayout>
 
     <TextView
