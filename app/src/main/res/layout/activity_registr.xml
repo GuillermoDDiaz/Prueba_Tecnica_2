@@ -59,7 +59,8 @@
                 android:hint="@string/examp_hint"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textColorHint="@color/gray"/>
+                android:textColorHint="@color/gray"
+                android:inputType="text"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,8 +77,9 @@
                 android:background="@drawable/border_txt"
                 android:hint="@string/examp_hint_2"
                 android:textColor="@color/black"
+                android:textColorHint="@color/gray"
                 android:textSize="20sp"
-                android:textColorHint="@color/gray"/>
+                android:inputType="text"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -94,7 +96,6 @@
                 android:textColorHint="@color/black"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/black"
-
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -105,7 +106,8 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:inputType="textPassword"
-                    tools:ignore="SmallSp" />
+                    tools:ignore="SmallSp"
+                    android:padding="8dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -114,7 +116,8 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/pass_verifi_name"
                 android:textColor="@color/gray"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -134,7 +137,8 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:inputType="textPassword"
-                    tools:ignore="SmallSp" />
+                    tools:ignore="SmallSp"
+                    android:padding="8dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 

@@ -20,11 +20,12 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/donut"
-            android:src="@drawable/donut"
+            android:src="@drawable/topping"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:tint="@color/white" />
+            android:tint="@color/white"
+             />
 
         <TextView
             android:id="@+id/tid"

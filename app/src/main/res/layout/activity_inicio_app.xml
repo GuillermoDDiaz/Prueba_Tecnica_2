@@ -9,24 +9,33 @@
     tools:context=".inicio.InicioAppActivity">
 
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/primary"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-
-
-            />
-
-    </com.google.android.material.appbar.AppBarLayout>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:text="@string/donut"
+    android:textAlignment="center"
+    android:textSize="25sp"
+    android:gravity="center"
+    android:textColor="@color/white"/>
+        <ImageButton
+            android:id="@+id/imgSal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/exit"
+            android:background="@color/primary"
+            android:layout_marginEnd="5dp"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/TWTit"

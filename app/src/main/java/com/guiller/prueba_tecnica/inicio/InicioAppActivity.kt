@@ -42,10 +42,16 @@ class InicioAppActivity() : AppCompatActivity(), passDetalel {
 
         //setContentView(R.layout.activity_inicio_app)
         val nombre= intent.extras?.getString("nombre") ?: "username"
+        initListeners()
         Peticion()
         saludar(nombre)
         pressBack()
 
+    }
+    private fun initListeners(){
+        binding.imgSal.setOnClickListener{
+            salir()
+        }
     }
 
     private fun saludar(usuario: String) {
@@ -60,16 +66,7 @@ class InicioAppActivity() : AppCompatActivity(), passDetalel {
     private fun pressBack() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val builder = AlertDialog.Builder(this@InicioAppActivity)
-                builder.setTitle("Salir")
-                builder.setMessage("Esta seguro que desea salir")
-                builder.setPositiveButton(android.R.string.ok) { dialog, which ->
-                    finish()
-                }
-                builder.setNegativeButton("Cancelar", null)
-                builder.show()
-
-
+                salir()
             }
         })
 
@@ -97,6 +94,16 @@ class InicioAppActivity() : AppCompatActivity(), passDetalel {
 
     }
 
+    private fun salir(){
+        val builder = AlertDialog.Builder(this@InicioAppActivity)
+        builder.setTitle("Salir")
+        builder.setMessage("Esta seguro que desea salir")
+        builder.setPositiveButton(android.R.string.ok) { dialog, which ->
+            finish()
+        }
+        builder.setNegativeButton("Cancelar", null)
+        builder.show()
+    }
 
     override fun datoDetalle(data: List<Topping>, dataB: List<Batter>) {
 
